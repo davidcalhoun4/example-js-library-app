@@ -1,18 +1,68 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <div>
+      <h1>Pokemon Game</h1>
+      <button v-on:click="popUp">Let's Play!</button>
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import swal from "sweetalert";
 
 export default {
-  name: "Home",
-  components: {
-    HelloWorld
-  }
+  methods: {
+    popUp() {
+      swal("A wild Pikachu appeared! What do you want to do?", {
+        buttons: {
+          cancel: "Run away!",
+          catch: {
+            text: "Throw Pokéball!",
+            value: "catch",
+          },
+          defeat: true,
+        },
+      }).then((value) => {
+        switch (value) {
+          case "defeat":
+            swal("Pikachu fainted! You gained 500 XP!");
+            break;
+
+          case "catch":
+            swal("Gotcha!", "Pikachu was caught!", "success");
+            break;
+
+          default:
+            swal("Got away safely!");
+        }
+      });
+    },
+  },
+  // mounted: function() {
+  //   swal("A wild Pikachu appeared! What do you want to do?", {
+  //     buttons: {
+  //       cancel: "Run away!",
+  //       catch: {
+  //         text: "Throw Pokéball!",
+  //         value: "catch",
+  //       },
+  //       defeat: true,
+  //     },
+  //   }).then((value) => {
+  //     switch (value) {
+  //       case "defeat":
+  //         swal("Pikachu fainted! You gained 500 XP!");
+  //         break;
+
+  //       case "catch":
+  //         swal("Gotcha!", "Pikachu was caught!", "success");
+  //         break;
+
+  //       default:
+  //         swal("Got away safely!");
+  //     }
+  //   });
+  // },
 };
 </script>
